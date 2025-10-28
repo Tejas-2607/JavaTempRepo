@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'yourdockerhubusername/javatemprepo'
+        DOCKER_IMAGE = 'tejasjahagirdar/javatemprepo'
     }
 
     stages {
