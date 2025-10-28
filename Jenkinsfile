@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'tejasjahagirdar/javatemprepo'
+        DOCKER_IMAGE = 'dockername/javatemprepo'
     }
 
     stages {
@@ -32,7 +32,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'tejasjahagirdar', passwordVariable: 'Tejasss@123')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'user', passwordVariable: 'pass')]) {
                     bat """
                     echo $PASS | docker login -u $USER --password-stdin
                     docker push ${DOCKER_IMAGE}:latest
