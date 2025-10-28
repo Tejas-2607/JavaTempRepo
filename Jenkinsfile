@@ -19,12 +19,16 @@ pipeline {
         }
 
         stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}:latest")
-                }
+    steps {
+        script {
+            def result = bat(script: 'docker info', returnStatus: true)
+            if (result != 0) {
+                error "❌ Docker daemon is not running. Please start Docker Desktop."
             }
+            bat 'docker build -t "tejasjahagirdar/javatemprepo:latest" .'
         }
+    }
+}
 
         stage('Push Docker Image') {
             steps {
