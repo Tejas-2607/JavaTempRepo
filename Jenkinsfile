@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build Application') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
@@ -28,8 +28,8 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh """
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'tejasjahagirdar', passwordVariable: 'Tejasss@123')]) {
+                    bat """
                     echo $PASS | docker login -u $USER --password-stdin
                     docker push ${DOCKER_IMAGE}:latest
                     """
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                sh """
+                bat """
                 docker stop javatemprepo || true
                 docker rm javatemprepo || true
                 docker run -d --name javatemprepo -p 8080:8080 ${DOCKER_IMAGE}:latest
